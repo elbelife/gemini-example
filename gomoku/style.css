@@ -1,11 +1,13 @@
 :root {
     --bg-color: #f0f2f5;
-    --board-color: #e3c185; /* Warm wood color */
-    --board-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    --board-color: #e3c185;
+    /* Warm wood color */
+    --board-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
     --grid-line-color: rgba(0, 0, 0, 0.4);
     --text-color: #333;
     --accent-color: #4a90e2;
-    --stone-size: 32px; /* Adjustable based on board size */
+    --stone-size: 32px;
+    /* Adjustable based on board size */
     --black-stone: radial-gradient(circle at 30% 30%, #444, #000);
     --white-stone: radial-gradient(circle at 30% 30%, #fff, #ddd 30%, #ccc 60%, #bbb);
     --hover-black: rgba(0, 0, 0, 0.3);
@@ -52,18 +54,30 @@ h1 {
     font-size: 1rem;
 }
 
-.status-bar {
+/* Controls and Status */
+.controls {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 500px;
-    padding: 0 10px;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+#mode-select,
+#difficulty-select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-family: inherit;
+    font-size: 1rem;
+    background-color: #fff;
+    cursor: pointer;
 }
 
 #status {
     font-size: 1.2rem;
     font-weight: 500;
+    margin-bottom: 10px;
+    height: 1.5rem;
+    /* Min height to prevent jump */
 }
 
 #reset-btn {
@@ -92,16 +106,20 @@ h1 {
     height: 500px;
     background-color: var(--board-color);
     box-shadow: var(--board-shadow);
-    border-radius: 4px; /* Slight rounding on board corners */
+    border-radius: 4px;
+    /* Slight rounding on board corners */
     display: grid;
-    grid-template-columns: repeat(15, 1fr); /* 15x15 grid */
+    grid-template-columns: repeat(15, 1fr);
+    /* 15x15 grid */
     grid-template-rows: repeat(15, 1fr);
-    padding: 15px; /* Padding creates the outer margin */
+    padding: 15px;
+    /* Padding creates the outer margin */
     /* Realistic wood texture overlay (optional, keeping clean for now or CSS generated) */
-    background-image: 
-        linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
-    background-size: 100% 100%; /* Just subtle noise if needed */
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 100% 100%;
+    /* Just subtle noise if needed */
 }
 
 /* The actual grid lines. We can use pseudo-elements on cells or a background gradient on the board.
@@ -120,7 +138,8 @@ h1 {
    So a 15x15 grid of cells REPRESENTS the 15x15 intersections.
    We need the lines to cross through the CENTER of each cell.
 */
-.cell::before { /* Horizontal line */
+.cell::before {
+    /* Horizontal line */
     content: '';
     position: absolute;
     top: 50%;
@@ -132,7 +151,8 @@ h1 {
     z-index: 1;
 }
 
-.cell::after { /* Vertical line */
+.cell::after {
+    /* Vertical line */
     content: '';
     position: absolute;
     left: 50%;
@@ -155,8 +175,9 @@ h1 {
     width: 85%;
     height: 85%;
     border-radius: 50%;
-    z-index: 2; /* Above lines */
-    box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    z-index: 2;
+    /* Above lines */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
     transform: scale(0);
     animation: placeStone 0.2s forwards;
 }
@@ -187,7 +208,8 @@ h1 {
     border-radius: 50%;
     z-index: 2;
     opacity: 0;
-    pointer-events: none; /* Let click pass through to cell */
+    pointer-events: none;
+    /* Let click pass through to cell */
     transition: opacity 0.2s;
 }
 
@@ -205,16 +227,16 @@ h1 {
     position: absolute;
     width: 30%;
     height: 30%;
-    background-color: rgba(255,0,0,0.6);
+    background-color: rgba(255, 0, 0, 0.6);
     border-radius: 50%;
     z-index: 3;
     top: 35%;
     left: 35%;
-    box-shadow: 0 0 4px rgba(255,0,0,0.8);
+    box-shadow: 0 0 4px rgba(255, 0, 0, 0.8);
 }
 
 /* Winning line indication */
 .winning-stone {
     filter: brightness(1.2);
-    box-shadow: 0 0 10px #4a90e2, 2px 2px 4px rgba(0,0,0,0.4); 
+    box-shadow: 0 0 10px #4a90e2, 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
